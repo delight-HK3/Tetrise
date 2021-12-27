@@ -61,3 +61,6 @@ void NextDrawBoard()
 }
 ```
 
+### 게임화면
+![게임수정후](https://user-images.githubusercontent.com/74585673/147439343-8eac3a96-985d-4cf7-93b7-04b2a3ec51e2.PNG)
+
