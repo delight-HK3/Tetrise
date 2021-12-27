@@ -1,20 +1,20 @@
 #include "Tetris.h"
 
-#define LEFT 75 //¾Æ½ºÅ°ÄÚµå °ü·Ã?
-#define RIGHT 77 //¾Æ½ºÅ°ÄÚµå °ü·Ã?
-#define UP 72 //¾Æ½ºÅ°ÄÚµå °ü·Ã?
-#define DOWN 80 //¾Æ½ºÅ°ÄÚµå °ü·Ã?
+#define LEFT 75 //ì•„ìŠ¤í‚¤ì½”ë“œ ê´€ë ¨
+#define RIGHT 77 //ì•„ìŠ¤í‚¤ì½”ë“œ ê´€ë ¨
+#define UP 72 //ì•„ìŠ¤í‚¤ì½”ë“œ ê´€ë ¨
+#define DOWN 80 //ì•„ìŠ¤í‚¤ì½”ë“œ ê´€ë ¨
 #define ESC 27
 #define BX 5
 #define BY 1
-#define BW 10 //Å×Æ®¸®½º °ÔÀÓÆÇ °¡·Î  
-#define BH 25 //Å×Æ®¸®½º °ÔÀÓÆÇ ¼¼·Î
+#define BW 10 //í…ŒíŠ¸ë¦¬ìŠ¤ ê²Œìž„íŒ ê°€ë¡œ  
+#define BH 25 //í…ŒíŠ¸ë¦¬ìŠ¤ ê²Œìž„íŒ ì„¸ë¡œ
 class Tetris {
 private:
-	int combo, counter; // ÄÞº¸, ¼ÓµµÄ«¿îÅÍ Ãß°¡
-	int score; // ½ºÄÚ¾î Ãß°¡
-	int gametime; // µô·¹ÀÌ ½Ã°£ Ãß°¡
-	int Level; //·¹º§ ½Ã½ºÅÛÃß°¡
+	int combo, counter; // ì½¤ë³´, ì†ë„ì¹´ìš´í„° 
+	int score; // ìŠ¤ì½”ì–´ 
+	int gametime; // ë”œë ˆì´ ì‹œê°„ 
+	int Level; //ë ˆë²¨ ì‹œìŠ¤í…œ
 public:
 	Tetris() {
 		combo = 0;
@@ -23,21 +23,21 @@ public:
 		gametime = 20; 
 		Level = 1; 
 	}
-	void Combo(); //ÄÞº¸ Á¦¾îÇÔ¼ö
-	void Speedup();//¼Óµµ »ó½Â ÇÔ¼ö
-	void DrawScore(); //½ºÄÚ¾î¿Í ·¹º§À» º¸¿©ÁÖ´Â ÇÔ¼ö
+	void Combo(); //ì½¤ë³´ ì œì–´í•¨ìˆ˜
+	void Speedup();//ì†ë„ ìƒìŠ¹ í•¨ìˆ˜
+	void DrawScore(); //ìŠ¤ì½”ì–´ì™€ ë ˆë²¨ì„ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
 	void PlusComboCounter() {
 		combo++;
 		counter++;
-		score = score + 1000;//º¯°æ3 : ÇÑ ÁÙ¸¶´Ù Á¦°Å½Ã 1000Á¡ Ãß°¡
+		score = score + 1000;//ë³€ê²½3 : í•œ ì¤„ë§ˆë‹¤ ì œê±°ì‹œ 1000ì  ì¶”ê°€
 	}
 	void Plusgametime() {
-		delay(1000 / gametime); //³»·Á¿À´Â ¼Óµµ Á¦¾î gametimeº¯¼ö°¡ Ä¿Áú¼ö·Ï »¡¸® ³»·Á¿Â´Ù.
+		delay(1000 / gametime); //ë‚´ë ¤ì˜¤ëŠ” ì†ë„ ì œì–´ gametimeë³€ìˆ˜ê°€ ì»¤ì§ˆìˆ˜ë¡ ë¹¨ë¦¬ ë‚´ë ¤ì˜¨ë‹¤.
 	}
 };
 void Tetris::Combo()
 {
-	if (combo >= 2) { //2°³ ÀÌ»ó µ¿½Ã¿¡ Á¦°Å½Ã (Á¡¼ö + (1000 * (ÄÞº¸ - 1) ) )
+	if (combo >= 2) { //2ê°œ ì´ìƒ ë™ì‹œì— ì œê±°ì‹œ (score + (1000 * (combo - 1) ) )
 		combo--;
 		score = score + (1000 * combo);
 	}
@@ -57,17 +57,17 @@ void Tetris::Speedup()
 }
 void Tetris::DrawScore()
 {
-	gotoxy(5, 28); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	gotoxy(5, 29); printf("¦­      Level : %ld     ¦­\n", Level);
-	gotoxy(5, 30); printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°\n");
-	gotoxy(35, 20); printf("¦­ Á¡¼ö : %07d                  ¦­\n", score);
-	gotoxy(35, 21); printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°\n");
+	gotoxy(5, 28); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	gotoxy(5, 29); printf("â”ƒ      Level : %ld     â”ƒ\n", Level);
+	gotoxy(5, 30); printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›\n");
+	gotoxy(35, 20); printf("â”ƒ ì ìˆ˜ : %07d                  â”ƒ\n", score);
+	gotoxy(35, 21); printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›\n");
 }
 
 void TestFull();
-void DrawScreen();//¸ÞÀÎ¸Þ´º¸¦ º¸¿©ÁÖ´Â ÇÔ¼ö
-void DrawBoard(); //°ÔÀÓº¸µå¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void NextDrawBoard(); //´ÙÀ½ºê¸¯ Ãâ·ÂÇÔ¼ö
+void DrawScreen();//ë©”ì¸ë©”ë‰´ë¥¼ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
+void DrawBoard(); //ê²Œìž„ë³´ë“œë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void NextDrawBoard(); //ë‹¤ìŒë¸Œë¦­ ì¶œë ¥í•¨ìˆ˜
 
 BOOL ProcessKey();
 void PrintBrick(BOOL Show);
@@ -88,11 +88,11 @@ struct Point Shape[][4][4] = {
 };
 
 enum { EMPTY, BRICK, WALL };
-const char *arTile[] = { "  ","¡á","¡à" };//º¯°æ : ". "À» »èÁ¦ÇÏ¿© º¸±âÆíÇÏ°Ô °³¼±
-const char *arTile2[] = { "  ","¡á","¡à" }; //º¯°æ : "´ÙÀ½ºí·Ï ¿¹ÃøÇÔ¼ö"
+const char *arTile[] = { "  ","â– ","â–¡" };//ë³€ê²½ : ". "ì„ ì‚­ì œí•˜ì—¬ ë³´ê¸°íŽ¸í•˜ê²Œ ê°œì„ 
+const char *arTile2[] = { "  ","â– ","â–¡" }; //ë³€ê²½ : "ë‹¤ìŒë¸”ë¡ ì˜ˆì¸¡í•¨ìˆ˜"
 int board[BW + 2][BH + 2];
 int nx, ny;
-int brick, nbrick, rot; // Áö±Ý³ª¿À´Âºí·Ï , ³ªÁß¿¡³ª¿Ãºí·Ï , ÁÙ
+int brick, nbrick, rot; // ì§€ê¸ˆë‚˜ì˜¤ëŠ”ë¸”ë¡ , ë‚˜ì¤‘ì—ë‚˜ì˜¬ë¸”ë¡ , ì¤„
 
 Tetris Ter1;
 void main(BOOL Show)
@@ -114,22 +114,22 @@ void main(BOOL Show)
 	nbrick = random(sizeof(Shape) / sizeof(Shape[0]));
 	NextDrawBoard();
 	for (; 1;)
-	{	//¹«ÇÑ·çÇÁ 
-	    //ºê¸¯ ¸ð¾çÀÓÀÇ ÁöÁ¤
+	{	//ë¬´í•œë£¨í”„ 
+	    //ë¸Œë¦­ ëª¨ì–‘ìž„ì˜ ì§€ì •
 		Ter1.DrawScore();
 		brick = nbrick;
 		nbrick = random(sizeof(Shape) / sizeof(Shape[0]));
 		NextDrawBoard();
-		nx = BW / 2;    									 // ºê¸¯ ¹èÄ¡ À§Ä¡ ¿¬»ê
-		ny = 3;	   									 // ºê¸¯ ¹èÄ¡ À§Ä¡ ¿¬»ê
+		nx = BW / 2;    									 // ë¸Œë¦­ ë°°ì¹˜ ìœ„ì¹˜ ì—°ì‚°
+		ny = 3;	   									 // ë¸Œë¦­ ë°°ì¹˜ ìœ„ì¹˜ ì—°ì‚°
 		rot = 0;
 
-		PrintBrick(TRUE);//ºê¸¯¹èÄ¡
-		if (GetAround(nx, ny, brick, rot) != EMPTY) {//Å×Æ®¸®½º ºí·°ÀÌ ²Ë Ã¡À»¶§ ¹«ÇÑ·çÇÁ Å»Ãâ
+		PrintBrick(TRUE);//ë¸Œë¦­ë°°ì¹˜
+		if (GetAround(nx, ny, brick, rot) != EMPTY) {//í…ŒíŠ¸ë¦¬ìŠ¤ ë¸”ëŸ­ì´ ê½‰ ì°¼ì„ë•Œ ë¬´í•œë£¨í”„ íƒˆì¶œ
 			break;
 		}
 		nStay = nFrame;
-		for (; 2;)   //¹«ÇÑ·çÇÁ
+		for (; 2;)   //ë¬´í•œë£¨í”„
 		{
 
 			if (--nStay == 0) {
@@ -146,10 +146,10 @@ void main(BOOL Show)
 	}
 	clrscr();
 	gotoxy(30, 12); puts("G A M E  O V E R");
-	setcursortype(NOCURSOR); //º¯°æ1. NORMALCURSOR´ë½Å¿¡ NOCURSORÀ» »ç¿ëÇÏ¿© ±ôºýÀÓ Á¦°Å
+	setcursortype(NOCURSOR); //ë³€ê²½1. NORMALCURSORëŒ€ì‹ ì— NOCURSORì„ ì‚¬ìš©í•˜ì—¬ ê¹œë¹¡ìž„ ì œê±°
 }
 
-void DrawScreen() //Å×Æ®¸®½º °ÔÀÓÆÇ Á¦ÀÛ
+void DrawScreen() //í…ŒíŠ¸ë¦¬ìŠ¤ ê²Œìž„íŒ ì œìž‘
 {
 	int x, y;
 	for (x = 0; x<BW + 2; x++) {
@@ -158,16 +158,16 @@ void DrawScreen() //Å×Æ®¸®½º °ÔÀÓÆÇ Á¦ÀÛ
 			puts(arTile[board[x][y]]);
 		}
 	}
-	gotoxy(41, 2); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-	gotoxy(41, 3); printf("¦­      Next Brick     ¦­");
-	gotoxy(41, 4); printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
-	gotoxy(41, 13); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-	gotoxy(41, 14); puts("¦­ Dabin Tetris Ver 1.0¦­");
-	gotoxy(41, 15); puts("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
-	gotoxy(35, 16); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	gotoxy(35, 17); puts("¦­ ÀÌµ¿ :¡ç ¡æ, È¸Àü :¡è, ³»¸² :¡é ¦­");
-	gotoxy(35, 18); puts("¦­ ³¡±îÁö ³»¸² : ½ºÆäÀÌ½º¹Ù        ¦­");
-	gotoxy(35, 19); printf("¦²¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦´\n");
+	gotoxy(41, 2); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+	gotoxy(41, 3); printf("â”ƒ      Next Brick     â”ƒ");
+	gotoxy(41, 4); printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
+	gotoxy(41, 13); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+	gotoxy(41, 14); puts("â”ƒ Dabin Tetris Ver 1.0â”ƒ");
+	gotoxy(41, 15); puts("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
+	gotoxy(35, 16); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	gotoxy(35, 17); puts("â”ƒ ì´ë™ :â† â†’, íšŒì „ :â†‘, ë‚´ë¦¼ :â†“ â”ƒ");
+	gotoxy(35, 18); puts("â”ƒ ëê¹Œì§€ ë‚´ë¦¼ : ìŠ¤íŽ˜ì´ìŠ¤ë°”        â”ƒ");
+	gotoxy(35, 19); printf("â”£â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”«\n");
 } 
 void DrawBoard()
 {
@@ -179,7 +179,7 @@ void DrawBoard()
 		}
 	}
 }
-void NextDrawBoard()//´ÙÀ½ºí·° ¿¹Ãø
+void NextDrawBoard()//ë‹¤ìŒë¸”ëŸ­ ì˜ˆì¸¡
 {
 	int x, y, i;
 
@@ -244,7 +244,7 @@ BOOL ProcessKey()
 	return FALSE;
 }
 
-void PrintBrick(BOOL Show)//ºê¸¯Ãâ·Â
+void PrintBrick(BOOL Show)//ë¸Œë¦­ì¶œë ¥
 {
 	int i;
 	for (i = 0; i<4; i++) {
@@ -262,7 +262,7 @@ int GetAround(int x, int y, int b, int r)
 	return k;
 }
 
-BOOL MoveDown()//¾Æ·¡·Î ³»·Á°¡°ÔÇÏ´Â ÇÔ¼ö
+BOOL MoveDown()//ì•„ëž˜ë¡œ ë‚´ë ¤ê°€ê²Œí•˜ëŠ” í•¨ìˆ˜
 {
 	if (GetAround(nx, ny + 1, brick, rot) != EMPTY) {
 		TestFull();
@@ -273,7 +273,7 @@ BOOL MoveDown()//¾Æ·¡·Î ³»·Á°¡°ÔÇÏ´Â ÇÔ¼ö
 	PrintBrick(TRUE);
 	return FALSE;
 }
-void TestFull()//ÇÑ ÁÙÀÌ ÀüºÎ Ã¤¿öÁ³´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+void TestFull()//í•œ ì¤„ì´ ì „ë¶€ ì±„ì›Œì¡ŒëŠ”ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
 {
 	int i, x, y, ty;
 
@@ -286,7 +286,7 @@ void TestFull()//ÇÑ ÁÙÀÌ ÀüºÎ Ã¤¿öÁ³´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
 			if (board[x][y] != BRICK) break;
 		}
 		if (x == BW + 1) {
-			for (ty = y; ty>1; ty--) { //ÇÑ ÁÙ Á¦°Å ¿¬»êÃ³¸® ºÎºÐ
+			for (ty = y; ty>1; ty--) { //í•œ ì¤„ ì œê±° ì—°ì‚°ì²˜ë¦¬ ë¶€ë¶„
 				for (x = 1; x<BW + 1; x++) {
 					board[x][ty] = board[x][ty - 1];
 				}
