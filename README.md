@@ -1,3 +1,4 @@
+UTF-8 encoding required
 # Tetrise
 * 기능
   * 기본적인 테트리스 기능 
