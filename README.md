@@ -62,6 +62,8 @@ void NextDrawBoard()
 ```
 
 ### 게임화면
-![게임수정후 (2)](https://user-images.githubusercontent.com/74585673/147549646-a71d9f1e-adb3-4b28-bf97-592ec74cf440.PNG)
+<kbd>
+	<img src="https://user-images.githubusercontent.com/74585673/147549646-a71d9f1e-adb3-4b28-bf97-592ec74cf440.PNG">
+</kbd>
 
 
