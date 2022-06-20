@@ -3,7 +3,7 @@
 >사용한 프레임워크 : 없음<br>
 >사용한 언어 : C++<br>
 >사용한 DB : 없음<br>
->사용한 Tool : Visual Studio 2019<br>
+>개발 Tool : Visual Studio 2019<br>
 >테스트한 OS : Window 10<br>
 <br>
 
